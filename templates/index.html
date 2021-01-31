@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>春节对联生成</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/denglu.css">
+		<link rel="stylesheet" href="../static/layui/css/layui.css">
+		<script src="../static/layui/layui.all.js"></script>
+		<script src="../static/js/jquery.min.js"></script>
+		<script>
+        window.onload = function () {
+            const submit = document.getElementById("submit");
+            submit.onclick = function () {
+                let index = layer.msg('生成中,请稍后......');
+                const message = document.getElementById("message").value;
+                let xmlHttp = new XMLHttpRequest;
+                xmlHttp.onreadystatechange = function () {
+                    if (xmlHttp.status === 200 && xmlHttp.readyState === 4) {
+                        if (xmlHttp.responseText !== '0') {
+                            document.getElementById("article").innerHTML = xmlHttp.responseText;
+                            xmlHttp.open("GET", "./playback", true);
+                            xmlHttp.send();
+                            layer.close(index);
+                        } else if (xmlHttp.responseText === '0') {
+                            layer.close(index);
+                            layer.alert('生成失败')
+                        }
+                    }
+                };
+                xmlHttp.open("GET", './random?message=' + message, true);
+                xmlHttp.send();
+            };
+
+        }
+    </script>
+		<style>
+
+    </style>
+	</head>
+	<body>
+
+		<!-- header -->
+		<div class="header_box">
+			<div class="header">
+				<ul class="app-header">
+					<li class="app-header-menuicon">
+						<i class="layui-icon layui-icon-more-vertical"></i>
+					</li>
+				</ul>
+				<div class="nav" style="visibility: visible">
+					<a href="index.html" class="active">功能</a>
+				</div>
+				<ul class="layui-nav header-down-nav">
+					<li class="layui-nav-item"><a href="index.html" class="active">>功能</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- end-header -->
+		<style type="text/css">
+			#yuyin {
+				position: absolute;
+				top: -20px;
+				left: 160px;
+			}
+		</style>
+
+		<!-- 说说生成功能开始 -->
+		<!-- 功能 -->
+		<div class="layui-collapse">
+			<!-- 表格变换开始 -->
+
+			<!-- 表单开始 -->
+			<div class="layui-colla-item">
+<!--				<h2 class="layui-colla-title" style="">对联生成</h2>-->
+				<div class="layui-colla-content layui-show">
+					<!-- 输入框 -->
+					<div class="layui-form-item">
+						<label class="layui-form-label">输入框：</label>
+						<div class="layui-input-inline">
+							<input type="text" name="message" id="message" required lay-verify="required" placeholder="请输开头字" autocomplete="off"
+							 class="layui-input" />
+						</div>
+
+					</div>
+
+					<div class="layui-form-item">
+						<div class="layui-input-block">
+							<button class="layui-btn layui-btn layui-btn-radius" name="message" id="submit">提交</button>
+						</div>
+					</div>
+					<!-- 输入框结束 -->
+
+					<!-- 内容显示框 -->
+					<div id="article" style="text-align: center;font-size: 25px;word-break: break-all;    border-radius: 25px;
+			border: 2px solid #8AC007;
+			padding: 20px; white-space: pre-line;"></div>
+					<!-- 内容显示框结束 -->
+				</div>
+				<!-- 说说生功能结束 -->
+				<!-- 表单结束 -->
+				<div class="layui-colla-item">
+					<h2 class="layui-colla-title">其他</h2>
+					<div class="layui-colla-content layui-show">
+						<div class="layui-carousel imgbox" id="test1">
+							<div carousel-item class="imgH" style="background-color: #231f20;">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 页脚 -->
+			<div style="margin-top: 20%" class="footer">
+				<div class="line"></div>
+				<p class="copyright">
+					@2021 xxxxxxx<br />
+					E-MAIL:528917317@qq.com<br />
+					TEL:18212313189
+				</p>
+				<div class="icon_box">
+					<a href="#"><i class="layui-icon layui-icon-login-wechat weixin-icon"></i></a>
+					<a href="#"><i class="layui-icon layui-icon-login-weibo weibo-icon"></i></a>
+				</div>
+			</div>
+	</body>
+</html>
